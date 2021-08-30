@@ -134,5 +134,6 @@ exports.likeSauce = (req, res, next) => {
         .catch((error) => res.status(400).json({ error }));
       // L'ID de l'utilisateur doit être ajouté du tableau usersDisliked.
       break;
+      default : console.log('error');
   }
 };
