@@ -2,8 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require('path');
 
-const stuffRoutes = require("./routes/stuff");
-const quizzRoutes = require("./routes/quizz");
 const userRoutes = require("./routes/user");
 const sauceRoutes = require("./routes/sauces");
 
@@ -25,8 +23,6 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use("/api/stuff", stuffRoutes);
-app.use("/api/products", quizzRoutes);
 app.use("/api/auth", userRoutes);
 app.use("/api/sauces", sauceRoutes);
 
