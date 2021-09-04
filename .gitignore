@@ -1,5 +1,5 @@
 node_modules
-*.jpg
-*.jpeg
-*.png
+/backend/images/*.jpg
+/backend/images/*.jpeg
+/backend/images/*.png
 .env
