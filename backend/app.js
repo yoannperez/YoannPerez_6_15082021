@@ -8,7 +8,7 @@ const sauceRoutes = require("./routes/sauces");
 const app = express();
 
 mongoose
-  .connect("mongodb+srv://usertest:6pqJecu7FazQCZ7@ocfullstack.7leet.mongodb.net/OCFullstack?retryWrites=true&w=majority", { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.MONGO_KEY, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connexion à MongoDB réussie ! You rocks !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 
