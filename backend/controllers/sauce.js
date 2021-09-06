@@ -1,22 +1,33 @@
+//                                         -------------------------------------------------------
+//                                         --                  SAUCES CONTROLLER                --
+//                                         -------------------------------------------------------
+
+
+// required modules
 const Sauce = require("../models/sauces");
 const fs = require("fs");
 
+
+// Calling all sauces
 exports.getSauce = (req, res, next) => {
   Sauce.find()
     .then((sauces) => res.status(201).json(sauces))
     .catch((error) => res.status(404).json({ error }));
 };
 
+// Calling one sauce
 exports.getOneSauce = (req, res, next) => {
   Sauce.findOne({ _id: req.params.id })
     .then((sauce) => res.status(200).json(sauce))
     .catch((error) => res.status(404).json({ error }));
 };
 
+// Create a sauce
 exports.createSauce = (req, res, next) => {
   const sauceObject = JSON.parse(req.body.sauce);
-  // console.log(sauceObject)
+  // Remove id because we don't need it
   delete sauceObject._id;
+
   const sauce = new Sauce({
     ...sauceObject,
     imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
@@ -57,13 +68,10 @@ exports.deleteSauce = (req, res, next) => {
 };
 
 exports.likeSauce = (req, res, next) => {
-  // { $pull: { <field1>: <value|condition>, <field2>: <value|condition>, ... } }
-  // { $push: { <field1>: <value1>, ... } }
-
   let like = req.body.like;
 
   switch (like) {
-    // Si like = 1, l'utilisateur aime (= like) la sauce.
+    // IF like = 1, l'utilisateur aime (= like) la sauce.
     case 1:
       Sauce.updateOne(
         { _id: req.params.id },

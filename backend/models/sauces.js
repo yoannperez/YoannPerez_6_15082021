@@ -1,5 +1,11 @@
+//                                         -------------------------------------------------------
+//                                         --                    SAUCES SCHEMA                  --
+//                                         -------------------------------------------------------
+
+// Need mongoose module
 const mongoose = require('mongoose');
 
+// Schema definition
 const sauceSchema = mongoose.Schema({
   userId : { type: String, required: true },
   name : { type: String, required: true },
@@ -12,7 +18,7 @@ const sauceSchema = mongoose.Schema({
   dislikes: { type: Number, required: false },
   usersLiked: { type: [""], required: false },
   usersDisliked:{ type: [""], required: false },
-  
 });
 
+// Export Schema 
 module.exports = mongoose.model('Sauce', sauceSchema);
