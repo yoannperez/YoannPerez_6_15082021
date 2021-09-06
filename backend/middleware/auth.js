@@ -1,3 +1,8 @@
+//                                         -------------------------------------------------------
+//                                         --         AUTHENTIFICATION MIDDLEWARE               --
+//                                         -------------------------------------------------------
+
+// Modules needed
 const jwt = require('jsonwebtoken');
 require ('dotenv').config();
 
