@@ -18,7 +18,7 @@ const app = express();
 
 // Create a connexion with MongoDB Atlas database
 mongoose
-  .connect(process.env.MONGO_KEY, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.MONGO_KEY)
   .then(() => console.log("MongoDB Database Online! You rocks !"))
   .catch(() => console.log("MongoDB Databse Offline, you've got a problem ! Please check .env config file."));
 
