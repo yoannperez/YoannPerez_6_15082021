@@ -12,7 +12,7 @@ const userSchema = mongoose.Schema({
   password: { type: String, required: true },
 });
 
-// Using uniqueValidator to prevent from 2 users with the same email
+// Using uniqueValidator plugin to prevent 2 users registring with the same email
 userSchema.plugin(uniqueValidator);
 
 // Export schema
