@@ -19,7 +19,7 @@ const User = require("../models/Users");
 // Create a user function
 exports.signup = (req, res, next) => {
   bcrypt
-    // Create an encrypt hash from user's password
+    // Create an encrypt hash from user's password, salted 10X
     .hash(req.body.password, 10)
     // With Promise, create user from userSchema, add email from req, then add hash as password
     .then((hash) => {
