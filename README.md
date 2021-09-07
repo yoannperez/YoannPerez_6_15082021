@@ -47,9 +47,10 @@ Vous pourvez enfin démarrer le serveur avec la commande :
 ```
 npm start
 ```
-Le serveur devrait démarrer en `localhost`, sur le port `3000` par défaut.
+Le serveur devrait démarrer en `localhost`, sur le port `3000`. Si le port 3000 est utilisé par un autre processus, redémarrez
+complètement votre ordinateur (pour permettre l'utilisation du port).
 
-Note : Dans le cadre de la formation, le projet est livré par transfert direct de fichier. Pour des questions de sécurité, les informations de connexions à la base de donnée, ainsi que les autres clés de sécurités, sont fournies dans un fichier de configuration non versionné. Si vous êtes sur le repos et que vous voulez tester l'application, merci de me contacter par mail à cette adresse: yoann.perez@gmail.com.
+Note : Dans le cadre de la formation, le projet est livré par transfert direct de fichier. Pour des questions de sécurité, les informations de connexions à la base de donnée, ainsi que d'autres clés de sécurité, sont fournies dans un fichier de configuration non versionné. Si vous êtes sur ce repos et que vous voulez tester l'application, merci de me contacter par mail à cette adresse: yoann.perez@gmail.com.
 
 # Partie Front-end (fournie par le commanditaire)
 
