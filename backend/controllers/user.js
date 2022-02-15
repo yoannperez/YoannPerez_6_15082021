@@ -41,12 +41,15 @@ exports.signup = (req, res, next) => {
 
 // Login function
 exports.login = (req, res, next) => {
+  // console.log('====================================');
+  // console.log(req.body);
+  // console.log('====================================');
   // Check in database if user exists
   User.findOne({ email: req.body.email })
     .then((user) => {
       // if user doesn't exist in database, return an error
       if (!user) {
-        return res.status(401).json({ error: "User not found !" });
+        return res.status(401).json({ error: "Email ou mot de passe incorrect" });
       }
       // if user exists, we need to verify password
       bcrypt
@@ -56,7 +59,7 @@ exports.login = (req, res, next) => {
         .then((valid) => {
           // In case password is not valid
           if (!valid) {
-            return res.status(401).json({ error: "Wrong password !" });
+            return res.status(401).json({ error: "Email ou mot de passe incorrect" });
           }
           // In case password matches with database, we send a response 200, the user id ans the Token created with jsonwebtoken
           res.status(200).json({
