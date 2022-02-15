@@ -15,6 +15,8 @@ const sauceRoutes = require("./routes/sauces");
 // Launch Xpress
 const app = express();
 
+// enable https when proxy on server
+app.enable('trust proxy')
 
 // Create a connexion with MongoDB Atlas database
 mongoose
