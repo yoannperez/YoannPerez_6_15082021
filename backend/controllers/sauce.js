@@ -29,9 +29,9 @@ exports.getOneSauce = (req, res, next) => {
 exports.createSauce = (req, res, next) => {
     // We need informaton (from frontend) in form-data format (not in JSON)
     const sauceObject = JSON.parse(req.body.sauce);
-    console.log("====================================");
-    console.log(req.body);
-    console.log("====================================");
+    // console.log("====================================");
+    // console.log(req.body);
+    // console.log("====================================");
     // Remove wrong id created by front end, we don't need it
     delete sauceObject._id;
 
@@ -62,27 +62,36 @@ exports.createSauce = (req, res, next) => {
 
 // ---------------- Modify sauce ----------------------
 exports.modifySauce = (req, res, next) => {
-    // creating sauceObjet
-    const sauceObject = req.file
-        ? // if req.file exists
-          {
-              ...JSON.parse(req.body.sauce),
-              imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
-          }
-        : // In case req.file doesn't exist
-          { ...req.body };
 
-    // then update Sauce with sauceObjet informations
-    Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
+    if (req.file) {
+        const sauceObject = {
+                      ...JSON.parse(req.body.sauce),
+                      imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+                  }
+        Sauce.findOne({ _id: req.params.id }).then((sauce) => {
+            // Split '/images/' from imageUrl and use 2nd part to get filename
+            const filename = sauce.imageUrl.split("/images/")[1];
+            // use unlink function from fs package in other to delete image file from server's storage
+            fs.unlink(`images/${filename}`, () => {
+                Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
+                    .then(() => res.status(200).json({ message: "Modified!" }))
+                    .catch((error) => res.status(400).json({ error }));
+            });
+        });
+    } else if (!req.file){ 
+        const sauceObject = { ...req.body };
+         Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
         .then(() => res.status(200).json({ message: "Modified!" }))
         .catch((error) => res.status(400).json({ error }));
+
+    }
 };
 
 // ---------------- Delete sauce ----------------------
 exports.deleteSauce = (req, res, next) => {
-    console.log('====================================');
-    console.log("Coucou Delete");
-    console.log('====================================');
+    // console.log('====================================');
+    // console.log("Coucou Delete");
+    // console.log('====================================');
     // Use id parameter from request
     Sauce.findOne({ _id: req.params.id })
         .then((sauce) => {
